@@ -43,8 +43,13 @@ app.get('/image/:breed', (req, res) => {
     const breed = req.params.breed
     const breedImagesList = images[breed]
 
-    const imageUrl = getRandomItemFromArray(breedImagesList)
-    res.json({"imageUrl" : imageUrl})
+    if (breedImagesList) {
+        const imageUrl = getRandomItemFromArray(breedImagesList)
+        res.json({"imageUrl" : imageUrl})
+    }
+    else {
+        res.json({})
+    }
     
 });
 

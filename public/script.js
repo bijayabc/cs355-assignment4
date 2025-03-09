@@ -14,8 +14,21 @@ function showImage(apiUrl){
     fetch(apiUrl)
     .then(res => res.json())
     .then(data => {
-        image.src = `/img/${data.imageUrl}`
-        document.body.appendChild(image)
+        if (data && data.imageUrl) {
+            if (document.body.contains(image)) {
+                image.remove();
+            }
+            result.innerHTML = ""
+            image.src = `/img/${data.imageUrl}`
+            document.body.appendChild(image)
+        } else {
+            if (document.body.contains(image)) {
+                image.remove()
+            }
+            result.innerHTML = "No such breed"
+            document.body.appendChild(result)
+            clearInterval(imageInterval)
+        }
     })
 }
 
